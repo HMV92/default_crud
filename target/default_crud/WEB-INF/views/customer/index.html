@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>All clients</title>
+</head>
+<body>
+<br>
+
+<a href="/customer">All customers</a><br>
+<a href="/customer/new">NEW customer</a><br>
+<br><br>
+
+<form action="#" th:object="${customer}">
+
+    <label for="name">Enter the name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <label for="surname">Enter the surname: </label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <br/>
+    <input type="submit" value="SEARCH" th:formmethod="GET" th:formaction="@{/customer/searching}">
+    <br/>
+    <input type="submit" value="CREATE NEW" th:formmethod="POST" th:formaction="@{/customer}">
+</form>
+
+<br><br>
+<h1>CUSTOMERS</h1>
+<br><br>
+<a href="/customer/generate">GENERATE!</a>
+<br><br><br>
+
+
+<table>
+    <thead>
+        <tr>
+            <th class="column-title">ID</th>
+            <th class="column-title">Name</th>
+            <th class="column-title">Surname</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="customer: ${customerList}" th:href="@{/customer/{id}(id=${customer.getId()})}">
+            <form action="#" th:object="${customer}">
+            <td th:text="${customer.id}">id</td>
+            <td><input type="text" th:value="${customer.name}" id="name"/></td>
+            <td><input type="text" th:value="${customer.surname}" id="surname"/></td>
+            <td>
+                <input type="submit" th:value="${'SAVE CHANGES'}" th:formmethod="POST"
+                        th:formaction="@{/customer/{id}(id=${customer.getId()})}"/>
+            </td>
+            <td>
+                <input type="submit" th:value="${'DELETE CUSTOMER'}"  th:formmethod="GET"
+                        th:formaction="@{/customer/remove/{id}(id=${customer.getId()})}"/>
+            </td>
+            </form>
+        </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

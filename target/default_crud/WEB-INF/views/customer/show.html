@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+</head>
+<body>
+
+<br>
+
+<a href="/customer">All customers</a><br>
+<a href="/customer/new">NEW customer</a><br>
+<br><br>
+<p>name:</p>
+<p th:text="${customer.getName()}">VALUE</p>
+<p>surname:</p>
+<p th:text="${customer.getSurname()}">VALUE</p>
+<p>id:</p>
+<p th:text="${customer.getId()}">VALUE</p>
+
+<a th:href="@{/customer/{id}/edit(id=${customer.getId()})}">EDIT</a>
+<!--th:text="${customer.getName()-->
+</body>
+</html>
