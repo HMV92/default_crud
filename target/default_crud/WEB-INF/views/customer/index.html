@@ -5,12 +5,9 @@
     <title>All clients</title>
 </head>
 <body>
+
+<h1>CUSTOMERS</h1>
 <br>
-
-<a href="/customer">All customers</a><br>
-<a href="/customer/new">NEW customer</a><br>
-<br><br>
-
 <form action="#" th:object="${customer}">
 
     <label for="name">Enter the name: </label>
@@ -25,11 +22,9 @@
 </form>
 
 <br><br>
-<h1>CUSTOMERS</h1>
-<br><br>
-<a href="/customer/generate">GENERATE!</a>
-<br><br><br>
 
+<a href="/customer/generate">GENERATE!</a>
+<br><br>
 
 <table>
     <thead>
@@ -40,13 +35,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr th:each="customer: ${customerList}" th:href="@{/customer/{id}(id=${customer.getId()})}">
-            <form action="#" th:object="${customer}">
+        <tr th:each="customer: ${customerList}">
+            <form action="#" th:method="POST">
             <td th:text="${customer.id}">id</td>
-            <td><input type="text" th:value="${customer.name}" id="name"/></td>
-            <td><input type="text" th:value="${customer.surname}" id="surname"/></td>
+            <td><input type="text" th:value="${customer.name}" id="name" name ="name"/></td>
+            <td><input type="text" th:value="${customer.surname}" id="surname" name="surname"/></td>
             <td>
-                <input type="submit" th:value="${'SAVE CHANGES'}" th:formmethod="POST"
+                <input type="submit" th:value="${'SAVE CHANGES'}"
                         th:formaction="@{/customer/{id}(id=${customer.getId()})}"/>
             </td>
             <td>
