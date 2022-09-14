@@ -5,9 +5,11 @@ import default_crud_app.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -24,7 +26,10 @@ public class CustomerController {
 
     //STANDARD OPERATIONS
     @PostMapping()
-    public String create(@ModelAttribute("customer") Customer customer) {
+    public String create(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
+        if (result.hasErrors()) {
+            return "customer/index";
+        }
         customerService.add(customer.getName(), customer.getSurname());
         return "redirect:/customer";
     }

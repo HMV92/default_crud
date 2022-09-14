@@ -1,8 +1,7 @@
 package default_crud_app.model;
 
-import org.springframework.lang.NonNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -13,11 +12,11 @@ public class Customer {
     private Long id;
 
     @Column(columnDefinition = "TEXT")
-    @NonNull
+    @NotBlank(message = "name is required")
     private String name;
 
     @Column(columnDefinition = "TEXT")
-    @NonNull
+    @NotBlank(message = "surname is required")
     private String surname;
 
     public Customer(String name, String surname) {
@@ -28,26 +27,23 @@ public class Customer {
     public Customer() {
     }
 
-    @NonNull
     public Long getId() {
         return id;
     }
 
-    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(@NonNull String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    @NonNull
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(@NonNull String surname) {
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 }
